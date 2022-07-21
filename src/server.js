@@ -1,9 +1,16 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-    res.status(200);
-    res.send("Hello World!");
+// import route add index route
+const route = require("./routes");
+app.use(route);
+
+// handle 404 error
+app.use("*", (req, res, next) => {
+    res.status(404);
+    res.json({
+        "error": "Not found"
+    });
 });
 
 const port = process.env.port || 3000;
