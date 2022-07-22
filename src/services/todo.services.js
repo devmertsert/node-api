@@ -17,7 +17,7 @@ module.exports = {
         } catch (error) {
             return {
                 code: 500,
-                message: error,
+                message: error.message,
                 status: 'fail',
                 data: null
             }
