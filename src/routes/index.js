@@ -5,6 +5,6 @@ const router = Router();
 // import routers
 const todoRoutes = require("./todo.routes");
 
-router.use("/todo",  todoRoutes);
+router.use("/todos",  todoRoutes);
 
 module.exports = router;

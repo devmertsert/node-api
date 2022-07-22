@@ -1,6 +1,12 @@
 const express = require("express");
 const app = express();
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // import route add index route
 const route = require("./routes");
 app.use(route);
@@ -13,7 +19,7 @@ app.use("*", (req, res, next) => {
     });
 });
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, ()=> {
     console.clear();
     console.info("Server has started on PORT: " + port);
