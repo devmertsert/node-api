@@ -13,7 +13,7 @@ app.use("*", (req, res, next) => {
     });
 });
 
-const port = process.env.port || 1410;
+const port = process.env.port || 3000;
 app.listen(port, ()=> {
     console.clear();
     console.info("Server has started on PORT: " + port);
