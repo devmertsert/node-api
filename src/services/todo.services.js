@@ -1,4 +1,4 @@
-const dynamoClient = require("../config/dynamodb");
+const dynamoClient = require("../config/dynamodb.config");
 const TableName = "todos";
 
 module.exports = {
