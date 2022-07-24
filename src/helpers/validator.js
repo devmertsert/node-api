@@ -46,10 +46,17 @@ module.exports = {
         const errors = validationResult(req);
         if(errors.isEmpty()) return next();
 
-        errors.name = "expressValidationError";
+        const extractedErrors = [];
+        errors.array().map((err) => extractedErrors.push({
+            key: err.param,
+            value: err.msg === "Invalid value" ? "Please enter a valid " + err.param : err.msg
+        }));
 
-        const error = handleErrors(errors);
-
-        return res.status(error.code).json(error);
+        return res.status(422).json({
+            code: 422,
+            status: 'error',
+            message: 'Express Validation Error',
+            errors: extractedErrors
+        });
     }
 }

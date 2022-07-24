@@ -20,10 +20,13 @@ const route = require("./routes");
 app.use(route);
 
 // handle 404 error
-const { handleErrors } = require("./helpers/handleErrors");
 app.use("*", (req, res, next) => {
-    const error = handleErrors({ name: "endpointDoesNotExist" });
-    res.status(error.code).json(error);
+    res.status(404).json({
+        code: 404,
+        status: 'error',
+        message: "Endpoint doesn't exist",
+        errors: {}
+    });
 });
 
 const port = process.env.PORT || 3000;

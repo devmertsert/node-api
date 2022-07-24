@@ -48,8 +48,12 @@ module.exports = {
 
             if(user) {
                 if(user.isValid(password)) {
-                    const refresh = jwt.sign({ id: user._id }, process.env.JWT_REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
-                    const access = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+                    const refresh = jwt.sign({ id: user._id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
+                        expiresIn: process.env.JWT_REFRESH_TOKEN_SECRET_LIFE
+                    });
+                    const access = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+                        expiresIn: process.env.JWT_ACCESS_TOKEN_SECRET_LIFE
+                    });
 
                     return {
                         code: 200,
