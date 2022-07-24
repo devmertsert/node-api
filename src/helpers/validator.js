@@ -42,6 +42,14 @@ module.exports = {
         ]
     },
 
+    todoCreate: () => {
+        return [
+            body("content")
+                .notEmpty().bail()
+                .isString()
+        ]
+    },
+
     validate: (req, res, next) => {
         const errors = validationResult(req);
         if(errors.isEmpty()) return next();
