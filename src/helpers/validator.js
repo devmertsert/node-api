@@ -3,14 +3,22 @@ const User = require("../models/user.model");
 const { handleErrors } = require("./handleErrors");
 
 module.exports = {
-    signin: () => {
+    signup: () => {
         return [
+            body("name")
+                .notEmpty().bail()
+                .isString().bail()
+                .isLength({ max: 20 }),
+            body("surname")
+                .notEmpty().bail()
+                .isString().bail()
+                .isLength({max: 20 }),
             body("username")
                 .notEmpty().bail()
                 .isString().bail()
                 .isLength({ max: 20 }).bail()
                 .custom((val) => {
-                    return User.findOne({ username: val }).then((user) => {
+                    return User.findOne({ lowercaseUsername: String(val).toLowerCase() }).then((user) => {
                         if(user) {
                             return Promise.reject("Username is taken");
                         }
@@ -22,6 +30,18 @@ module.exports = {
                 .isLength({ min: 6, max: 16 })
         ]
     },
+
+    signin: () => {
+        return [
+            body("username")
+                .notEmpty().bail()
+                .isLength({ max: 20 }),
+            body("password")
+                .notEmpty().bail()
+                .isLength({ max: 16 })
+        ]
+    },
+
     validate: (req, res, next) => {
         const errors = validationResult(req);
         if(errors.isEmpty()) return next();

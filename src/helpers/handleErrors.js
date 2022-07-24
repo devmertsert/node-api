@@ -41,5 +41,12 @@ module.exports.handleErrors = (error) => {
         }
     }
 
+    return {
+        code: (error.code > 500 || error.code < 200) ? 500 : error.code,
+        status: 'error',
+        message: error.message,
+        errors: error.errors || []
+    }
+
     return true;
 }
