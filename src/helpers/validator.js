@@ -56,7 +56,7 @@ module.exports = {
             code: 422,
             status: 'error',
             message: 'Express Validation Error',
-            errors: extractedErrors
+            error: extractedErrors
         });
     }
 }

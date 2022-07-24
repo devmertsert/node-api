@@ -25,7 +25,7 @@ app.use("*", (req, res, next) => {
         code: 404,
         status: 'error',
         message: "Endpoint doesn't exist",
-        errors: {}
+        error: {}
     });
 });
 

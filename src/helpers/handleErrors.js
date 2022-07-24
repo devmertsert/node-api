@@ -12,7 +12,7 @@ module.exports.handleErrors = (error) => {
             code: 422,
             status: 'error',
             message: 'Validation Error',
-            errors: extractedErrors
+            error: extractedErrors
         }
     }
 
@@ -20,6 +20,6 @@ module.exports.handleErrors = (error) => {
         code: (error.code > 500 || error.code < 200) ? 500 : error.code,
         status: 'error',
         message: error.message,
-        errors: error.errors || []
+        error: error.errors || []
     }
 }
