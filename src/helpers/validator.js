@@ -1,6 +1,8 @@
-const { body, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 const User = require("../models/user.model");
 const { handleErrors } = require("./handleErrors");
+
+const { Types } = require("mongoose");
 
 module.exports = {
     signup: () => {
@@ -39,6 +41,35 @@ module.exports = {
             body("password")
                 .notEmpty().bail()
                 .isLength({ max: 16 })
+        ]
+    },
+
+    todoCreate: () => {
+        return [
+            body("content")
+                .notEmpty().bail()
+                .isString()
+        ]
+    },
+
+    todoGetById: () => {
+        return [
+            param("id").custom((val) => Types.ObjectId.isValid(val))
+        ]
+    },
+
+    todoUpdate: () => {
+        return [
+            param("id").custom((val) => Types.ObjectId.isValid(val)),
+            body("content")
+                .notEmpty().bail()
+                .isString()
+        ]
+    },
+
+    todoDelete: () => {
+        return [
+            param("id").custom((val) => Types.ObjectId.isValid(val))
         ]
     },
 

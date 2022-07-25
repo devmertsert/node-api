@@ -6,7 +6,7 @@ const router = Router();
 const todoRoutes = require("./todo.routes");
 const authRoutes = require("./auth.routes");
 
-router.use("/todos",  todoRoutes);
+router.use("/todo",  todoRoutes);
 router.use("/auth", authRoutes);
 
 module.exports = router;
